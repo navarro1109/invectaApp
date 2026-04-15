@@ -1,0 +1,142 @@
+estructura,categoria,material,unidad,cantidad
+A-I-1,Aérea Monoposte,Cable ACSR No.2,m,50
+A-I-1,Aérea Monoposte,Aislador Pin 15kV,pza,3
+A-I-1,Aérea Monoposte,Cruceta de Madera 1.5m,pza,1
+A-I-1,Aérea Monoposte,Perno de Anclaje 5/8",pza,4
+A-I-1,Aérea Monoposte,Alambre de Amarre No.6,m,2
+A-I-2,Aérea Monoposte,Cable ACSR No.2,m,50
+A-I-2,Aérea Monoposte,Aislador Pin 15kV,pza,3
+A-I-2,Aérea Monoposte,Cruceta de Madera 1.8m,pza,1
+A-I-2,Aérea Monoposte,Perno de Anclaje 5/8",pza,4
+A-I-2,Aérea Monoposte,Alambre de Amarre No.6,m,2
+A-I-2,Aérea Monoposte,Retenida de Suelo Completa,jgo,1
+A-II-1,Aérea Doble Circuito,Cable ACSR No.2,m,100
+A-II-1,Aérea Doble Circuito,Aislador Pin 15kV,pza,6
+A-II-1,Aérea Doble Circuito,Cruceta de Madera 1.5m,pza,2
+A-II-1,Aérea Doble Circuito,Perno de Anclaje 5/8",pza,8
+A-II-1,Aérea Doble Circuito,Alambre de Amarre No.6,m,4
+A-II-2,Aérea Doble Circuito,Cable ACSR No.2,m,100
+A-II-2,Aérea Doble Circuito,Aislador Pin 15kV,pza,6
+A-II-2,Aérea Doble Circuito,Cruceta de Madera 1.8m,pza,2
+A-II-2,Aérea Doble Circuito,Perno de Anclaje 5/8",pza,8
+A-II-2,Aérea Doble Circuito,Alambre de Amarre No.6,m,4
+A-II-2,Aérea Doble Circuito,Retenida de Suelo Completa,jgo,2
+A-III-1,Aérea Triple Circuito,Cable ACSR No.2,m,150
+A-III-1,Aérea Triple Circuito,Aislador Pin 15kV,pza,9
+A-III-1,Aérea Triple Circuito,Cruceta de Madera 1.5m,pza,3
+A-III-1,Aérea Triple Circuito,Perno de Anclaje 5/8",pza,12
+A-III-1,Aérea Triple Circuito,Alambre de Amarre No.6,m,6
+B-I-1,Ángulo / Cambio de Dirección,Cable ACSR No.2,m,50
+B-I-1,Ángulo / Cambio de Dirección,Aislador Suspensión 15kV,pza,3
+B-I-1,Ángulo / Cambio de Dirección,Cadena de Suspensión Completa,jgo,3
+B-I-1,Ángulo / Cambio de Dirección,Estribo de Línea,pza,6
+B-I-1,Ángulo / Cambio de Dirección,Cruceta de Madera 1.5m,pza,1
+B-II-1,Ángulo / Cambio de Dirección,Cable ACSR No.2,m,50
+B-II-1,Ángulo / Cambio de Dirección,Aislador Suspensión 15kV,pza,6
+B-II-1,Ángulo / Cambio de Dirección,Cadena de Suspensión Completa,jgo,6
+B-II-1,Ángulo / Cambio de Dirección,Estribo de Línea,pza,12
+B-II-1,Ángulo / Cambio de Dirección,Cruceta de Madera 1.8m,pza,2
+CS-1,Cometida de Servicio,Cable Triplex 4/0 AWG,m,25
+CS-1,Cometida de Servicio,Abrazadera Bimetálica,pza,2
+CS-1,Cometida de Servicio,Aislador Retenida 15kV,pza,2
+CS-1,Cometida de Servicio,Caja de Medidor Exterior,pza,1
+CS-1,Cometida de Servicio,Tubo Conduit 2",m,3
+CS-1,Cometida de Servicio,Conector Compresión 4/0,pza,2
+CS-2,Cometida de Servicio,Cable Triplex 2/0 AWG,m,20
+CS-2,Cometida de Servicio,Abrazadera Bimetálica,pza,2
+CS-2,Cometida de Servicio,Aislador Retenida 15kV,pza,2
+CS-2,Cometida de Servicio,Caja de Medidor Exterior,pza,1
+CS-2,Cometida de Servicio,Tubo Conduit 1.5",m,3
+CS-2,Cometida de Servicio,Conector Compresión 2/0,pza,2
+CS-3,Cometida de Servicio,Cable Triplex 1/0 AWG,m,20
+CS-3,Cometida de Servicio,Abrazadera Bimetálica,pza,2
+CS-3,Cometida de Servicio,Aislador Retenida 15kV,pza,1
+CS-3,Cometida de Servicio,Caja de Medidor Interior,pza,1
+CS-3,Cometida de Servicio,Tubo Conduit 1",m,2
+CS-3,Cometida de Servicio,Conector Compresión 1/0,pza,2
+TS-15KVA,Transformador en Poste,Transformador 15 KVA 7.62/13.2kV,pza,1
+TS-15KVA,Transformador en Poste,Cortacircuito Fusible 15kV 100A,pza,3
+TS-15KVA,Transformador en Poste,Pararrayos 15kV,pza,3
+TS-15KVA,Transformador en Poste,Cruceta de Acero para Transformador,pza,1
+TS-15KVA,Transformador en Poste,Ménsula de Transformador,pza,2
+TS-15KVA,Transformador en Poste,Cable Primario ACSR No.2,m,10
+TS-15KVA,Transformador en Poste,Cable Secundario 4/0 AWG,m,15
+TS-15KVA,Transformador en Poste,Conector Compresión 4/0,pza,6
+TS-15KVA,Transformador en Poste,Aislador Pin 15kV,pza,3
+TS-25KVA,Transformador en Poste,Transformador 25 KVA 7.62/13.2kV,pza,1
+TS-25KVA,Transformador en Poste,Cortacircuito Fusible 15kV 100A,pza,3
+TS-25KVA,Transformador en Poste,Pararrayos 15kV,pza,3
+TS-25KVA,Transformador en Poste,Cruceta de Acero para Transformador,pza,1
+TS-25KVA,Transformador en Poste,Ménsula de Transformador,pza,2
+TS-25KVA,Transformador en Poste,Cable Primario ACSR No.2,m,12
+TS-25KVA,Transformador en Poste,Cable Secundario 4/0 AWG,m,18
+TS-25KVA,Transformador en Poste,Conector Compresión 4/0,pza,6
+TS-25KVA,Transformador en Poste,Aislador Pin 15kV,pza,3
+TS-37.5KVA,Transformador en Poste,Transformador 37.5 KVA 7.62/13.2kV,pza,1
+TS-37.5KVA,Transformador en Poste,Cortacircuito Fusible 15kV 100A,pza,3
+TS-37.5KVA,Transformador en Poste,Pararrayos 15kV,pza,3
+TS-37.5KVA,Transformador en Poste,Cruceta de Acero para Transformador,pza,1
+TS-37.5KVA,Transformador en Poste,Ménsula de Transformador,pza,2
+TS-37.5KVA,Transformador en Poste,Cable Primario ACSR 1/0,m,12
+TS-37.5KVA,Transformador en Poste,Cable Secundario 4/0 AWG,m,20
+TS-37.5KVA,Transformador en Poste,Conector Compresión 4/0,pza,8
+TS-50KVA,Transformador en Poste,Transformador 50 KVA 7.62/13.2kV,pza,1
+TS-50KVA,Transformador en Poste,Cortacircuito Fusible 15kV 100A,pza,3
+TS-50KVA,Transformador en Poste,Pararrayos 15kV,pza,3
+TS-50KVA,Transformador en Poste,Plataforma de Transformador,pza,1
+TS-50KVA,Transformador en Poste,Cable Primario ACSR 2/0,m,15
+TS-50KVA,Transformador en Poste,Cable Secundario 4/0 AWG,m,25
+TS-50KVA,Transformador en Poste,Conector Compresión 4/0,pza,10
+TS-75KVA,Transformador en Poste,Transformador 75 KVA 7.62/13.2kV,pza,1
+TS-75KVA,Transformador en Poste,Cortacircuito Fusible 15kV 100A,pza,3
+TS-75KVA,Transformador en Poste,Pararrayos 15kV,pza,3
+TS-75KVA,Transformador en Poste,Plataforma de Transformador,pza,1
+TS-75KVA,Transformador en Poste,Cable Primario ACSR 4/0,m,15
+TS-75KVA,Transformador en Poste,Cable Secundario 250 MCM,m,30
+TS-75KVA,Transformador en Poste,Conector Compresión 250 MCM,pza,12
+TS-100KVA,Transformador en Poste,Transformador 100 KVA 7.62/13.2kV,pza,1
+TS-100KVA,Transformador en Poste,Cortacircuito Fusible 15kV 200A,pza,3
+TS-100KVA,Transformador en Poste,Pararrayos 15kV,pza,3
+TS-100KVA,Transformador en Poste,Plataforma de Transformador,pza,1
+TS-100KVA,Transformador en Poste,Cable Primario ACSR 4/0,m,18
+TS-100KVA,Transformador en Poste,Cable Secundario 350 MCM,m,35
+TS-100KVA,Transformador en Poste,Conector Compresión 350 MCM,pza,12
+R-I-1,Retenida / Anclaje,Varilla de Anclaje 5/8"x8',pza,1
+R-I-1,Retenida / Anclaje,Placa de Anclaje 6"x6",pza,1
+R-I-1,Retenida / Anclaje,Cable de Acero 3/8",m,10
+R-I-1,Retenida / Anclaje,Aislador de Retenida,pza,1
+R-I-1,Retenida / Anclaje,Guardacabo de Retenida,pza,2
+R-I-1,Retenida / Anclaje,Abrazadera de Poste,pza,1
+R-I-2,Retenida / Anclaje,Varilla de Anclaje 3/4"x10',pza,1
+R-I-2,Retenida / Anclaje,Placa de Anclaje 8"x8",pza,1
+R-I-2,Retenida / Anclaje,Cable de Acero 1/2",m,12
+R-I-2,Retenida / Anclaje,Aislador de Retenida,pza,1
+R-I-2,Retenida / Anclaje,Guardacabo de Retenida,pza,2
+R-I-2,Retenida / Anclaje,Abrazadera de Poste,pza,1
+P-BT-1,Poste Baja Tensión,Poste de Concreto 9m 300kg,pza,1
+P-BT-1,Poste Baja Tensión,Cable Triplex 4/0 AWG,m,50
+P-BT-1,Poste Baja Tensión,Gancho de Anclaje BT,pza,2
+P-BT-1,Poste Baja Tensión,Aislador de Carrete BT,pza,6
+P-BT-1,Poste Baja Tensión,Conector Compresión 4/0,pza,2
+P-BT-1,Poste Baja Tensión,Alambre de Amarre No.8,m,5
+P-BT-2,Poste Baja Tensión,Poste de Concreto 9m 400kg,pza,1
+P-BT-2,Poste Baja Tensión,Cable Triplex 2/0 AWG,m,50
+P-BT-2,Poste Baja Tensión,Gancho de Anclaje BT,pza,2
+P-BT-2,Poste Baja Tensión,Aislador de Carrete BT,pza,6
+P-BT-2,Poste Baja Tensión,Conector Compresión 2/0,pza,2
+P-BT-2,Poste Baja Tensión,Retenida de Suelo Completa,jgo,1
+SEC-1,Seccionador / Protección,Seccionador Unipolar 15kV 100A,pza,3
+SEC-1,Seccionador / Protección,Cruceta de Acero 1.5m,pza,1
+SEC-1,Seccionador / Protección,Aislador Soporte 15kV,pza,6
+SEC-1,Seccionador / Protección,Cable Cobre Desnudo 2/0,m,10
+SEC-1,Seccionador / Protección,Terminal de Compresión 2/0,pza,6
+PD-1,Puesta a Tierra,Electrodo Copperweld 5/8"x8',pza,2
+PD-1,Puesta a Tierra,Conector Tipo C 2/0-14,pza,2
+PD-1,Puesta a Tierra,Cable Cobre Desnudo No.2,m,15
+PD-1,Puesta a Tierra,Cinta de Cobre 3/4",m,5
+PD-1,Puesta a Tierra,Bentonita,kg,25
+PD-2,Puesta a Tierra,Electrodo Copperweld 3/4"x10',pza,3
+PD-2,Puesta a Tierra,Conector Tipo C 4/0-14,pza,3
+PD-2,Puesta a Tierra,Cable Cobre Desnudo No.4/0,m,20
+PD-2,Puesta a Tierra,Malla de Tierra 4/0,m,10
+PD-2,Puesta a Tierra,Bentonita,kg,50

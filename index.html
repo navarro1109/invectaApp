@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Invecta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<!-- External dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+
+<div class="ipad" id="app">
+
+  <!-- ═══ SCREEN 1: LOGIN ═══ -->
+  <div class="screen active" id="screen-login">
+    <div class="login-inner">
+
+      <!-- INVECTA LOGO -->
+      <div class="login-logo-wrap">
+        <img src="assets/logo-icon.png" class="login-logo-icon" alt="Invecta">
+        <img src="assets/logo-text.png" class="login-logo-text" alt="INVECTA">
+      </div>
+      <div class="login-tagline">Sistema de Gestión de Proyectos Eléctricos</div>
+
+      <!-- FORM FIELDS (appearance only) -->
+      <div class="login-fields">
+        <input class="login-field" type="email" placeholder="Correo electrónico" id="login-email" autocomplete="email">
+        <input class="login-field" type="password" placeholder="Contraseña" id="login-pw" autocomplete="current-password">
+      </div>
+
+      <div class="iniciar-wrap">
+        <button class="iniciar-btn" id="iniciar-btn" onclick="doLogin()">
+          <span class="btn-icon">↻</span>
+          <span class="btn-text">INICIAR</span>
+        </button>
+      </div>
+      <div id="login-error" style="text-align:center;color:var(--red);font-size:13px;margin-top:8px;display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ═══ SCREEN 1b: REGISTER ═══ -->
+  <div class="screen" id="screen-register">
+    <div class="login-inner">
+      <div class="login-logo">Invecta</div>
+      <div class="login-title">Crear<br>cuenta</div>
+      <div class="login-fields">
+        <input class="login-field" type="text" placeholder="Nombre para mostrar" id="reg-name" autocomplete="name">
+        <input class="login-field" type="text" placeholder="Código de ingeniero / N° de cuenta" id="reg-code">
+        <input class="login-field" type="email" placeholder="Correo electrónico" id="reg-email" autocomplete="email">
+        <input class="login-field" type="password" placeholder="Contraseña (mín. 6 caracteres)" id="reg-pw" autocomplete="new-password">
+      </div>
+      <div class="iniciar-wrap">
+        <button class="iniciar-btn" id="register-btn" onclick="doSignUp()">
+          <span class="btn-icon">↻</span>
+          <span class="btn-text">REGISTRAR</span>
+        </button>
+      </div>
+      <div style="text-align:center;margin-top:18px;">
+        <span style="font-size:13px;color:var(--label4);">¿Ya tienes cuenta? </span>
+        <button onclick="goTo('screen-login')" style="font-size:13px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:inherit;font-weight:700;">Iniciar sesión</button>
+      </div>
+      <div id="register-error" style="text-align:center;color:var(--red);font-size:13px;margin-top:8px;display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ═══ SCREEN 2: HOME ═══ -->
+  <div class="screen" id="screen-home">
+    <div class="topnav">
+      <button class="nav-btn" onclick="openDrawer()" title="Menú">☰</button>
+      <img src="assets/logo-text.png" class="nav-logo-img" alt="INVECTA">
+      <div class="nav-profile" id="nav-profile-home" title="Perfil" onclick="openProfile()">F</div>
+    </div>
+    <div class="scroll-content">
+      <div class="home-header fade-up">
+        <div class="home-greeting">Bienvenido de nuevo,</div>
+        <div class="home-name" id="home-username">—</div>
+      </div>
+      <div class="projects-list" id="projects-list"></div>
+    </div>
+    <button class="fab" onclick="showConfirmNewProject()" title="Nuevo proyecto">+</button>
+  </div>
+
+  <!-- ═══ SCREEN 3: PROJECT PAGE ═══ -->
+  <div class="screen" id="screen-project">
+    <div class="topnav">
+      <button class="nav-btn" onclick="goTo('screen-home');renderHome()" title="Volver">‹</button>
+      <img src="assets/logo-text.png" class="nav-logo-img" alt="INVECTA">
+      <div class="nav-profile" onclick="openProfile()">F</div>
+    </div>
+    <div class="scroll-content" id="project-scroll">
+      <div class="proj-page-header">
+        <div class="proj-page-name" id="proj-page-name">—</div>
+        <div class="proj-page-owner" id="proj-page-owner">—</div>
+      </div>
+
+      <!-- Estado selector -->
+      <div class="estado-selector" id="estado-selector"></div>
+
+      <!-- Selected structures summary -->
+      <div class="section-label">Estructuras seleccionadas</div>
+      <div class="structs-table-wrap" id="structs-summary"></div>
+
+      <!-- Search bar -->
+      <div class="search-bar-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-bar" id="struct-search" type="text"
+          placeholder="Buscar estructura..."
+          oninput="filterCatList(this.value)">
+      </div>
+
+      <!-- Categories selector -->
+      <div class="categories-section">
+        <div class="cat-section-title">Categorías</div>
+        <div id="cat-list"></div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <button class="btn btn-ghost btn-upload" style="flex:1" onclick="openSubirPlano()">
+        ↑ Subir Plano
+      </button>
+      <button class="btn btn-primary" style="flex:1" onclick="goToMaterials()">
+        Calcular Materiales
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ SCREEN 4: MATERIALS ═══ -->
+  <div class="screen" id="screen-materials">
+    <div class="topnav">
+      <button class="nav-btn" onclick="goTo('screen-project');renderProjectPage()">‹</button>
+      <img src="assets/logo-text.png" class="nav-logo-img" alt="INVECTA">
+      <div class="nav-profile" onclick="openProfile()">F</div>
+    </div>
+    <div class="scroll-content">
+      <div class="mat-header-info">
+        <div class="mat-proj-name" id="mat-proj-name">—</div>
+        <div class="mat-proj-owner" id="mat-proj-owner">—</div>
+      </div>
+      <div id="mat-summary-card"></div>
+      <div class="mat-table-wrap" id="mat-table"></div>
+    </div>
+    <div class="bottom-bar">
+      <button class="btn btn-ghost" style="flex:1" onclick="goTo('screen-home');renderHome()">Inicio</button>
+      <button class="btn btn-primary" style="flex:1" onclick="exportPDF()">Descargar PDF</button>
+    </div>
+  </div>
+
+  <!-- ═══ SCREEN 5: LIBRERÍAS ═══ -->
+  <div class="screen" id="screen-librerias">
+    <div class="topnav">
+      <button class="nav-btn" onclick="closeDrawerAndGo('screen-home')">‹</button>
+      <img src="assets/logo-text.png" class="nav-logo-img" alt="INVECTA">
+      <div class="nav-profile" onclick="openProfile()">F</div>
+    </div>
+    <div class="scroll-content">
+      <div class="lib-header">
+        <div class="lib-title">Librerías</div>
+        <div class="lib-sub" id="lib-sub">Base de datos de estructuras</div>
+      </div>
+      <div class="lib-search-wrap">
+        <span class="lib-search-icon">🔍</span>
+        <input class="lib-search" id="lib-search-input" type="text"
+          placeholder="Buscar estructura o material..."
+          oninput="renderLibrerias(this.value)">
+      </div>
+      <div class="lib-stats" id="lib-stats"></div>
+      <div class="lib-content" id="lib-content"></div>
+    </div>
+  </div>
+
+  <!-- ═══ SCREEN 6: PROFILE ═══ -->
+  <div class="screen" id="screen-profile">
+    <div class="topnav">
+      <button class="nav-btn" onclick="goTo('screen-home');renderHome()">‹</button>
+      <img src="assets/logo-text.png" class="nav-logo-img" alt="INVECTA">
+      <div style="width:40px"></div>
+    </div>
+    <div class="scroll-content">
+      <div class="lib-header">
+        <div class="lib-title">Mi Perfil</div>
+        <div class="lib-sub" id="profile-email-sub">—</div>
+      </div>
+
+      <!-- Avatar -->
+      <div style="display:flex;flex-direction:column;align-items:center;padding:8px 24px 24px;">
+        <div id="profile-avatar-wrap" style="position:relative;width:96px;height:96px;margin-bottom:16px;">
+          <div id="profile-avatar-display"
+            style="width:96px;height:96px;border-radius:50%;background:rgba(229,229,234,0.8);backdrop-filter:blur(12px);border:3px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;color:var(--label3);overflow:hidden;box-shadow:var(--shadow);">
+          </div>
+          <label for="profile-pic-input"
+            style="position:absolute;bottom:0;right:0;width:30px;height:30px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid white;font-size:14px;box-shadow:0 2px 8px rgba(0,122,255,0.4);">📷</label>
+          <input type="file" id="profile-pic-input" accept="image/*" style="display:none" onchange="profilePicSelected(event)">
+        </div>
+      </div>
+
+      <!-- Fields -->
+      <div style="padding:0 24px;display:flex;flex-direction:column;gap:14px;">
+        <div class="field-group">
+          <label class="field-label">Nombre para mostrar</label>
+          <input class="field" id="profile-displayname" placeholder="Tu nombre">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Código de ingeniero / N° de cuenta</label>
+          <input class="field" id="profile-code" placeholder="Ej: CI-12345 / CIP-98765">
+          <div style="font-size:11px;color:var(--label4);margin-top:4px;padding-left:4px;">Este código aparecerá en tus reportes PDF</div>
+        </div>
+      </div>
+
+      <div style="padding:24px;">
+        <button class="btn btn-primary" style="width:100%" onclick="saveProfile()">Guardar cambios</button>
+      </div>
+      <div style="padding:0 24px 40px;">
+        <button onclick="doLogout()"
+          style="width:100%;padding:14px;border-radius:14px;border:1.5px solid rgba(255,59,48,0.25);background:rgba(255,59,48,0.05);backdrop-filter:blur(8px);font-family:inherit;font-size:15px;font-weight:600;color:var(--red);cursor:pointer;transition:all 0.15s;">
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DRAWER ═══ -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer(event)">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div class="drawer-logo-wrap">
+          <img src="assets/logo-icon.png" class="drawer-logo-icon" alt="">
+          <img src="assets/logo-text.png" class="drawer-logo-text" alt="INVECTA">
+        </div>
+      </div>
+      <div class="drawer-nav">
+        <div class="drawer-item active" onclick="closeDrawerAndGo('screen-home')">
+          <span class="drawer-icon">⌂</span> Inicio
+        </div>
+        <div class="drawer-item disabled">
+          <span class="drawer-icon">↑↓</span> Reportes
+        </div>
+        <div class="drawer-item" onclick="closeDrawerAndGo('screen-librerias')">
+          <span class="drawer-icon">◈</span> Librerías
+        </div>
+        <div class="drawer-item" onclick="closeDrawer(event);openProfile()">
+          <span class="drawer-icon">👤</span> Mi Perfil
+        </div>
+      </div>
+      <div class="drawer-footer">
+        <button class="drawer-new-btn" onclick="closeDrawerAndShowNew()">+ Nuevo Proyecto</button>
+        <button onclick="doLogout()"
+          style="margin-top:10px;width:100%;padding:12px;border-radius:12px;border:1.5px solid rgba(255,59,48,0.25);background:rgba(255,59,48,0.05);font-family:inherit;font-size:14px;font-weight:600;color:var(--red);cursor:pointer;backdrop-filter:blur(8px);">
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DIALOG: Confirm new project ═══ -->
+  <div class="dialog-overlay" id="dlg-confirm">
+    <div class="dialog">
+      <div class="dialog-title">¿Crear nuevo proyecto?</div>
+      <div class="dialog-sub">Ingresa los datos del proyecto para comenzar.</div>
+      <div class="dialog-actions">
+        <button class="btn btn-ghost" onclick="closeDlg('dlg-confirm')">Cancelar</button>
+        <button class="btn btn-primary" onclick="confirmNewProject()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DIALOG: New project form ═══ -->
+  <div class="dialog-overlay" id="dlg-form">
+    <div class="dialog form-dialog">
+      <div class="dialog-title">Nuevo Proyecto</div>
+      <div class="field-group">
+        <label class="field-label">Nombre del proyecto *</label>
+        <input class="field" id="new-nombre" placeholder="Ej: Línea Media Tensión Sector Norte">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Descripción</label>
+        <input class="field" id="new-desc" placeholder="Descripción breve del proyecto">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Propietario / Cliente</label>
+        <input class="field" id="new-owner" placeholder="Nombre del propietario o cliente">
+      </div>
+      <div style="display:flex;gap:10px;margin-top:8px;">
+        <button class="btn btn-ghost" style="flex:1" onclick="closeDlg('dlg-form')">Cancelar</button>
+        <button class="btn btn-primary" style="flex:1" onclick="createProject()">Crear Proyecto →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DIALOG: Edit project ═══ -->
+  <div class="dialog-overlay" id="dlg-edit">
+    <div class="dialog edit-dialog">
+      <div class="dialog-title">Editar Proyecto</div>
+      <input type="hidden" id="edit-project-id">
+      <div class="field-group">
+        <label class="field-label">Nombre del proyecto</label>
+        <input class="field" id="edit-nombre" placeholder="Nombre del proyecto">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Propietario</label>
+        <input class="field" id="edit-propietario" placeholder="Propietario">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Descripción</label>
+        <input class="field" id="edit-descripcion" placeholder="Descripción (opcional)">
+      </div>
+      <div class="dialog-actions">
+        <button class="btn btn-ghost" style="flex:1" onclick="closeDlg('dlg-edit')">Cancelar</button>
+        <button class="btn btn-primary" style="flex:1" onclick="saveEditProject()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DIALOG: Confirm delete ═══ -->
+  <div class="dialog-overlay" id="dlg-delete">
+    <div class="dialog">
+      <div class="dialog-title">¿Eliminar proyecto?</div>
+      <div class="dialog-sub" id="dlg-delete-name">Esta acción no se puede deshacer.</div>
+      <div class="dialog-actions">
+        <button class="btn btn-ghost" style="flex:1" onclick="closeDlg('dlg-delete')">Cancelar</button>
+        <button class="btn btn-primary" style="flex:1;background:var(--red);" onclick="confirmDeleteProject()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DIALOG: Subir Plano (PDF Analyzer) ═══ -->
+  <div class="dialog-overlay" id="dlg-plano">
+    <div class="dialog plano-dialog">
+      <div class="dialog-title">📐 Analizar Plano PDF</div>
+      <div class="dialog-sub" style="text-align:left;margin-bottom:14px;">Sube un PDF con texto copiable y detectaremos las estructuras automáticamente.</div>
+
+      <div class="plano-drop-zone" id="plano-drop"
+        onclick="document.getElementById('plano-file-input').click()"
+        ondragover="planoOnDragOver(event)"
+        ondragleave="planoOnDragLeave(event)"
+        ondrop="planoOnDrop(event)">
+        <div class="plano-drop-icon">📄</div>
+        <div class="plano-drop-title">Seleccionar archivo PDF</div>
+        <div class="plano-drop-sub">O arrastra el archivo aquí</div>
+      </div>
+      <input type="file" id="plano-file-input" accept=".pdf" style="display:none" onchange="planoOnFileSelect(event)">
+
+      <div class="plano-progress" id="plano-progress">
+        <div class="plano-progress-bar-wrap">
+          <div class="plano-progress-bar" id="plano-progress-bar"></div>
+        </div>
+        <div class="plano-progress-label" id="plano-progress-label">Leyendo PDF...</div>
+      </div>
+
+      <div class="plano-results" id="plano-results" style="display:none"></div>
+
+      <div class="dialog-actions" id="plano-actions">
+        <button class="btn btn-ghost" style="flex:1" onclick="closeDlg('dlg-plano')">Cancelar</button>
+        <button class="btn btn-primary" style="flex:1;display:none" id="plano-add-btn" onclick="planoAddSelected()">Agregar seleccionadas</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TOAST CONTAINER ═══ -->
+  <div class="toast-wrap" id="toast-wrap"></div>
+
+</div><!-- end .ipad -->
+
+<script src="js/app.js"></script>
+</body>
+</html>
